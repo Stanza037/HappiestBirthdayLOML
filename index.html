@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Mahetaz — A Birthday Wrapped in Starlight ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Dancing+Script:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #fdf5ed;
+      background-image: radial-gradient(circle at 20% 30%, rgba(230, 180, 130, 0.08) 2.5%, transparent 3%),
+                        radial-gradient(circle at 80% 70%, rgba(200, 150, 100, 0.06) 2%, transparent 2.5%),
+                        repeating-linear-gradient(45deg, rgba(255, 235, 210, 0.3) 0px, rgba(255, 235, 210, 0.3) 1px, transparent 1px, transparent 20px);
+      background-size: 55px 55px, 60px 60px, 30px 30px;
+      color: #3a2a1f;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* animated sparkle canvas - more magical */
+    #sparkle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 998;
+    }
+
+    /* floating petals & soft magic - enhanced */
+    .floating-petal {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.4rem;
+      opacity: 0.6;
+      animation: floatSoft 16s ease-in-out forwards;
+      z-index: 999;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));
+    }
+
+    @keyframes floatSoft {
+      0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0.4; }
+      20% { opacity: 0.7; }
+      80% { opacity: 0.6; }
+      100% { transform: translateY(-20vh) rotate(400deg) scale(1.1); opacity: 0; }
+    }
+
+    /* surprise glow effect for page transitions */
+    @keyframes gentleGlow {
+      0% { box-shadow: 0 0 0 0 rgba(215, 120, 70, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(215, 120, 70, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(215, 120, 70, 0); }
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+      position: relative;
+      scroll-snap-align: start;
+      transition: background 0.5s ease;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* elegant nav dots - gold shimmer */
+    .nav-dots {
+      position: fixed;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 110;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d4a574;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+      border: 1px solid #fff4ea;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .nav-dot::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(215,120,70,0.3), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .nav-dot.active {
+      background: #e07a3a;
+      transform: scale(2.2);
+      box-shadow: 0 0 12px #f5bc8c;
+    }
+
+    .nav-dot.active::after {
+      opacity: 1;
+      animation: gentleGlow 1.5s infinite;
+    }
+
+    /* page1 - hero with enchanting frame */
+    .page-1 {
+      background: radial-gradient(ellipse at 30% 40%, #fff3e8, #ffe0ce);
+      position: relative;
+    }
+    .page-1::before {
+      content: '✨';
+      position: absolute;
+      font-size: 120px;
+      opacity: 0.08;
+      bottom: 20px;
+      right: 20px;
+      pointer-events: none;
+    }
+    .vintage-frame {
+      background: rgba(255, 252, 245, 0.96);
+      backdrop-filter: blur(8px);
+      border-radius: 80px 80px 70px 70px;
+      padding: 2rem;
+      box-shadow: 0 40px 55px -22px rgba(60, 30, 10, 0.3), inset 0 1px 4px rgba(255,255,240,0.9), 0 0 0 12px rgba(255, 240, 220, 0.4);
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+      border: 1px solid #ffefde;
+      transition: transform 0.4s ease;
+    }
+    .vintage-frame:hover {
+      transform: scale(1.01);
+    }
+    .portrait-img {
+      width: 100%;
+      max-width: 380px;
+      border-radius: 60px 60px 55px 55px;
+      object-fit: cover;
+      border: 6px solid #fffaf2;
+      box-shadow: 0 25px 35px -15px rgba(70, 35, 10, 0.25);
+      transition: transform 0.3s;
+    }
+    .portrait-img:hover {
+      transform: scale(1.02);
+    }
+    .handwrite-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 4.2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #b85a2a, #da8750, #b85a2a);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 0.8rem 0 0.3rem;
+      letter-spacing: 2px;
+      animation: shimmer 3s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* poetry section - elegant */
+    .page-2 {
+      background: linear-gradient(125deg, #fff8f0, #ffefdf);
+      position: relative;
+    }
+    .poetry-card {
+      background: rgba(255, 253, 248, 0.96);
+      border-radius: 65px;
+      padding: 2.2rem 2rem;
+      max-width: 740px;
+      margin: 0 auto;
+      box-shadow: 0 30px 45px -18px rgba(70, 40, 15, 0.15), inset 0 0 0 1px rgba(255,245,230,0.8);
+      border: none;
+      transition: all 0.3s;
+    }
+    .poetry-card:hover {
+      box-shadow: 0 35px 50px -20px rgba(70, 40, 15, 0.2);
+    }
+
+    /* memory lane - refined */
+    .page-3 {
+      background: #fffaf2;
+    }
+    .memory-card {
+      background: rgba(255, 253, 248, 0.98);
+      border-radius: 55px;
+      padding: 1.2rem 1.2rem 1.8rem 1.2rem;
+      box-shadow: 0 18px 32px -18px rgba(80, 50, 25, 0.18);
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid #ffefdf;
+    }
+    .memory-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 28px 40px -18px rgba(80, 50, 25, 0.25);
+      background: #ffffff;
+    }
+    .memory-card img {
+      border-radius: 48px;
+      transition: transform 0.4s;
+    }
+    .memory-card:hover img {
+      transform: scale(1.01);
+    }
+
+    /* letter page - vintage paper effect */
+    .page-4 {
+      background: #fdf3e9;
+      position: relative;
+    }
+    .page-4::after {
+      content: '✧';
+      font-size: 80px;
+      position: absolute;
+      bottom: 30px;
+      left: 20px;
+      opacity: 0.08;
+      font-family: serif;
+    }
+    .letter-vintage {
+      background: #fffef8;
+      border-radius: 75px;
+      padding: 2.5rem 2.2rem;
+      box-shadow: 0 32px 48px -24px rgba(60, 30, 10, 0.2), inset 0 1px 0 #fff8e0, inset 0 0 0 1px #fff0e0;
+      border: none;
+      position: relative;
+    }
+    .letter-vintage::before {
+      content: '“';
+      font-size: 100px;
+      font-family: 'Dancing Script', cursive;
+      color: #e2aa7a;
+      opacity: 0.15;
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      pointer-events: none;
+    }
+
+    /* closing stars - enchanted */
+    .page-5 {
+      background: radial-gradient(ellipse at 50% 30%, #ffefdf, #ffe3cf);
+      position: relative;
+    }
+    .star-blessing {
+      background: rgba(255, 252, 245, 0.55);
+      backdrop-filter: blur(3px);
+      border-radius: 85px;
+      padding: 2rem 1.8rem;
+    }
+    
+    /* audio player custom styling */
+    .playlist-embed {
+      background: rgba(255, 248, 240, 0.95);
+      border-radius: 70px;
+      padding: 1.3rem 1.5rem;
+      box-shadow: 0 18px 32px -12px rgba(0,0,0,0.12), inset 0 1px 2px rgba(255,255,220,0.8);
+      transition: all 0.3s;
+    }
+    .playlist-embed:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 38px -14px rgba(0,0,0,0.15);
+    }
+    audio {
+      width: 100%;
+      border-radius: 60px;
+      background: #f7ede3;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.05));
+    }
+    audio::-webkit-media-controls-panel {
+      background: #f7ede3;
+    }
+
+    /* surprise entrance animation for pages */
+    @keyframes fadeSlideUp {
+      0% { opacity: 0; transform: translateY(25px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .page {
+      animation: fadeSlideUp 0.8s ease-out forwards;
+    }
+
+    /* responsive polish */
+    @media (max-width: 680px) {
+      .vintage-frame { padding: 1.4rem; }
+      .handwrite-name { font-size: 3rem; }
+      .letter-vintage { padding: 1.6rem; }
+      .playlist-embed { padding: 1rem; }
+    }
+    
+    html { scroll-snap-type: y mandatory; }
+    
+    /* surprise sparkle on load */
+    .glow-dust {
+      position: fixed;
+      width: 5px;
+      height: 5px;
+      background: #f7bc7a;
+      border-radius: 50%;
+      filter: blur(1px);
+      pointer-events: none;
+      z-index: 996;
+      animation: dustDrift 15s linear infinite;
+    }
+    @keyframes dustDrift {
+      0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+      20% { opacity: 0.6; }
+      80% { opacity: 0.4; }
+      100% { transform: translateY(-20vh) translateX(30px); opacity: 0; }
+    }
+    
+    /* custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f0e0d0;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #d99b62;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="sparkle-canvas"></canvas>
+<div class="nav-dots" id="navDots"></div>
+
+<!-- PAGE 1: CHILDHOOD PHOTO + WISH (Hero) -->
+<section class="page page-1" id="page1">
+  <div class="container" style="text-align:center">
+    <div class="vintage-frame">
+      <img class="portrait-img" id="childhoodPhoto" alt="Mahetaz childhood" src="image.png">
+      <h1 class="handwrite-name">Mahetaz</h1>
+      <div class="birthday-wish"><i class="fas fa-star"></i> Happiest Birthday, Beautiful Soul <i class="fas fa-star"></i></div>
+      <p style="margin-top:1rem; font-size:0.95rem; color:#7e5a40;"><i class="fas fa-feather-alt"></i> From the little girl who held stardust in her eyes to the magnificent woman you've become, every version of you is pure magic. Today, the universe celebrates YOU✨.</p>
+      <p style="margin-top:0.7rem; font-size:0.9rem; font-style:italic;">“May your life always be as beautiful as the dreams you’ve carried since childhood.”</p>
+    </div>
+    <div style="margin-top:1.8rem; font-size:1.3rem; animation: gentleBounce 2s infinite; cursor:pointer;" id="scrollArrow"><i class="fas fa-chevron-down" style="color:#c47a44;"></i></div>
+  </div>
+</section>
+
+<!-- PAGE 2: POETRY & BLESSINGS SECTION -->
+<section class="page page-2" id="page2">
+  <div class="container">
+    <div class="poetry-card">
+      <div class="poem-title">🌸 Petals of Verse for Mahetaz 🌸</div>
+      <div class="verse">
+        “She walks in beauty, like the night<br>
+        Of cloudless climes and starry skies;<br>
+        And all that’s best of dark and bright<br>
+        Meet in her aspect and her eyes.”<br>
+        <span style="font-size:0.85rem;">— Lord Byron, for you</span>
+      </div>
+      <div class="verse">
+        Your laughter is a melody that never fades,<br>
+        Your kindness is a garden in full bloom.<br>
+        May every step you take be blessed with light,<br>
+        May every dream you hold find its way to the moon.
+      </div>
+      <div class="verse">
+        On this day, the world is dressed in gold,<br>
+        Because a soul like yours was born.<br>
+        May happiness follow you like a loyal shadow,<br>
+        And may you always be loved, cherished, and adored.
+      </div>
+      <div style="text-align:center; margin-top:1.2rem; font-family:'Dancing Script'; font-size:1.3rem; color:#bc6f3f;">
+        ✨ Happy Birthday, Mahetaz — you are a once-in-a-lifetime wonder ✨
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 3: MEMORY LANE — BIG IMAGES WITH YOUR DESCRIPTIONS -->
+<section class="page page-3" id="page3">
+  <div class="container">
+    <h2 class="gallery-title"><i class="fas fa-camera-retro"></i> Memory Lane · Treasures of You</h2>
+    <div class="memory-strip" id="memoryGallery"></div>
+    <p style="text-align:center; margin-top:1.8rem; font-family:'Playfair Display'; font-style:italic; color:#a76e48;">I find myself at a loss for words before such elegance😗</p>
+  </div>
+</section>
+
+<!-- PAGE 4: A Letter from the Heart (Victorian elegance) -->
+<section class="page page-4" id="page4">
+  <div class="container">
+    <div class="letter-vintage">
+      <div style="text-align:center"><span class="handwritten-title">Dearest Mahetaz</span></div>
+      <div class="letter-body">
+       <div class="letter-body">
+   <p>There are souls who walk into a room and change the very air — filling it with warmth, with light, with the quiet promise of something beautiful. That is you, always.</p>
+        <p>On your birthday, I wanted to wrap these words in ribbons and lace, just like the finest memory. Every laugh we've shared, every silent understanding, every adventure — you've painted my world in golden hues. You are the kind of person that poems are written about, the one who makes ordinary days feel like a celebration.</p>
+        <p>May life always be gentle with you, may your dreams bloom like wildflowers in spring, and may you always know how infinitely you are cherished. You are magic, Mahetaz — never doubt the beauty you carry within.</p>
+        <p>With every whisper of the wind, I send you love and wishes that stretch beyond forever.</p>
+      </div>
+      <div class="signature">— Forever your Friend, with all my heart 🧡</div>
+      <div style="text-align: center; margin-top: 0.8rem; font-size: 1.4rem;">🌹✨🎀</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 5: Closing Stars & Final Blessing (with playlist) -->
+<section class="page page-5" id="page5">
+  <div class="container star-blessing">
+    <i class="fas fa-moon-stars" style="font-size: 3.5rem; color: #e2a16a;"></i>
+    <h2 style="font-family:'Dancing Script'; font-size: 2.6rem; margin: 0.8rem 0;">Under the Same Starlight</h2>
+    <div class="verse" style="border-left-color:#f1ba8b; text-align:center; border-left:none;">
+      <p>May every dawn greet you with a new reason to smile.</p>
+      <p>May the universe always conspire in your favor.</p>
+      <p>You are the poetry that does not fade, the light that never dims.</p>
+      <p style="margin-top:1rem;">🌟 Wrapped in love, today and beyond 🌟</p>
+      <div style="margin-top:1rem; font-family:'Dancing Script'; font-size:2rem; color:#c57341;">Happy Birthday, Mahetaz</div>
+      <p style="margin-top:0.5rem;">You are the heartbeat of every celebration, the star that guides us all.</p>
+    <div class="playlist-embed" style="text-align:center;">
+  <audio controls style="width: 100%; border-radius: 50px; background: #f7ede3;">
+    <source src="Ishq Bulaava Hasee Toh Phasee 128 Kbps.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <p style="text-align:center; font-size:0.8rem; margin-top:0.8rem; color:#a76e48;">
+    🎧 For you, Mahetaz — play from at 1:19 🎧
+    Yeah those are my words for you
+  </p>
+</div>
+  </div>
+</section>
+
+<footer> ✦  May every star above whisper blessings upon thee, and may our hearts forever dance in this sweet, timeless melody ✦</footer>
+
+<script>
+  // enhanced sparkle canvas with golden shimmer
+  const sparkCanvas = document.getElementById('sparkle-canvas');
+  const ctx2 = sparkCanvas.getContext('2d');
+  let sparkArr = [];
+  function resizeSpark() {
+    sparkCanvas.width = window.innerWidth;
+    sparkCanvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeSpark);
+  resizeSpark();
+  class SoftSpark {
+    constructor() {
+      this.x = Math.random() * sparkCanvas.width;
+      this.y = Math.random() * sparkCanvas.height;
+      this.r = Math.random() * 2.5 + 1;
+      this.alpha = Math.random() * 0.5 + 0.2;
+      this.vx = (Math.random() - 0.5) * 0.2;
+      this.vy = (Math.random() - 0.6) * 0.12;
+      this.color = `hsl(${30 + Math.random() * 20}, 85%, 65%)`;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0) this.x = sparkCanvas.width;
+      if (this.x > sparkCanvas.width) this.x = 0;
+      if (this.y < 0) this.y = sparkCanvas.height;
+      if (this.y > sparkCanvas.height) this.y = 0;
+      this.alpha = 0.3 + Math.sin(Date.now() * 0.003 + this.x) * 0.2;
+    }
+    draw() {
+      ctx2.beginPath();
+      ctx2.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx2.fillStyle = `rgba(255, 210, 140, ${this.alpha * 0.8})`;
+      ctx2.fill();
+      ctx2.beginPath();
+      ctx2.arc(this.x-0.5, this.y-0.5, this.r*0.4, 0, Math.PI*2);
+      ctx2.fillStyle = `rgba(255, 240, 180, 0.9)`;
+      ctx2.fill();
+    }
+  }
+  for (let i=0;i<140;i++) sparkArr.push(new SoftSpark());
+  function animateSparkles() {
+    ctx2.clearRect(0,0,sparkCanvas.width,sparkCanvas.height);
+    for (let s of sparkArr) { s.update(); s.draw(); }
+    requestAnimationFrame(animateSparkles);
+  }
+  animateSparkles();
+
+  // enhanced floating petals - more variety
+  function createPetal() {
+    const el = document.createElement('div');
+    const icons = ['🌸','🌼','🍂','✨','🕊️','🌺','🎀','🌷','⭐','💫','🌙','🍃'];
+    el.innerHTML = icons[Math.floor(Math.random()*icons.length)];
+    el.classList.add('floating-petal');
+    el.style.left = Math.random() * 100 + '%';
+    el.style.fontSize = (Math.random() * 20 + 14) + 'px';
+    el.style.animationDuration = (Math.random() * 12 + 8) + 's';
+    el.style.animationDelay = Math.random() * 3 + 's';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 15000);
+  }
+  setInterval(() => { if (Math.random()>0.6) createPetal(); }, 1800);
+
+  // memory data (unchanged)
+  const memoryData = [
+    { 
+      img: "image copy 4.png", 
+      desc: "🌸 The little dreamer.. even then, your eyes held galaxies. The world was already yours, wrapped in curiosity and grace. This is where your story began to sparkle." 
+    },
+    { 
+      img: "image copy.png", 
+      desc: "🍂 Golden sunlight and your radiant smile., a moment frozen in perfect joy. I remember this picture(Even drawn it worse lol) like a verse from an old poem: timeless, warm, and filled with laughter." 
+    },
+    { 
+      img: "image copy 2.png", 
+      desc: "🌿CULTURAL??? looks Brave, curious, full of wonder. This picture captures your fearless heart.. always ready to explore, to love, to grow. A true reflection of your beautiful soul." 
+    },
+    { 
+      img: "image copy 3.png", 
+      desc: "💖 A heart made of kindness one must adore(only me) you've always carried the warmth of a thousand suns. This photo reminds me how you make everyone around you feel seen and cherished." 
+    },
+  ];
+
+  const galleryDiv = document.getElementById('memoryGallery');
+  function buildMemories() {
+    galleryDiv.innerHTML = '';
+    memoryData.forEach((item, idx) => {
+      const card = document.createElement('div');
+      card.className = 'memory-card';
+      const img = document.createElement('img');
+      img.src = item.img;
+      img.alt = `Mahetaz memory ${idx+1}`;
+      img.loading = "lazy";
+      img.onerror = () => { img.src = "https://placehold.co/700x500/FFE0CE/AC6240?text=❤️+Mahetaz"; };
+      const noteDiv = document.createElement('div');
+      noteDiv.className = 'memory-note';
+      noteDiv.innerHTML = `<p><i class="fas fa-feather-alt"></i> ${item.desc}</p><span><i class="far fa-heart"></i> memory no. ${idx+1}</span>`;
+      card.appendChild(img);
+      card.appendChild(noteDiv);
+      galleryDiv.appendChild(card);
+    });
+  }
+  buildMemories();
+
+  // childhood photo fallback
+  const childImg = document.getElementById('childhoodPhoto');
+  childImg.onerror = () => { childImg.src = "https://placehold.co/500x500/FFE2CF/B86431?text=🌹+Little+Mahetaz"; };
+
+  // scroll navigation
+  const sections = ['page1','page2','page3','page4','page5'];
+  const dotNav = document.getElementById('navDots');
+  sections.forEach(id => {
+    const dot = document.createElement('div');
+    dot.classList.add('nav-dot');
+    dot.addEventListener('click', () => document.getElementById(id).scrollIntoView({ behavior: 'smooth' }));
+    dotNav.appendChild(dot);
+  });
+  function updateDots() {
+    const scrollPos = window.scrollY + window.innerHeight/2.5;
+    let activeIdx = 0;
+    sections.forEach((id, idx) => {
+      const el = document.getElementById(id);
+      if(el) {
+        const top = el.offsetTop;
+        const bottom = top + el.offsetHeight;
+        if(scrollPos >= top && scrollPos <= bottom) activeIdx = idx;
+      }
+    });
+    document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+      if(i === activeIdx) dot.classList.add('active');
+      else dot.classList.remove('active');
+    });
+  }
+  window.addEventListener('scroll', updateDots);
+  window.addEventListener('resize', updateDots);
+  updateDots();
+  
+  const scrollArrow = document.getElementById('scrollArrow');
+  if(scrollArrow) {
+    scrollArrow.addEventListener('click', () => {
+      document.getElementById('page2').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  // surprise effect: gentle sparkle rain on load
+  for(let i=0;i<20;i++) setTimeout(()=>createPetal(), i*150);
+  setInterval(() => {
+    if(Math.random() > 0.7) {
+      const dust = document.createElement('div');
+      dust.classList.add('glow-dust');
+      dust.style.left = Math.random() * 100 + '%';
+      dust.style.width = Math.random() * 8 + 3 + 'px';
+      dust.style.height = dust.style.width;
+      dust.style.animationDuration = (Math.random() * 10 + 8) + 's';
+      document.body.appendChild(dust);
+      setTimeout(() => dust.remove(), 14000);
+    }
+  }, 1600);
+  
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      for(let i=0;i<12;i++) createPetal();
+    }, 400);
+  });
+</script>
+</body>
+</html>
