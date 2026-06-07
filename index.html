@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>Mahetaz — A Birthday Wrapped in Starlight ✨</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Dancing+Script:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Mahetaz — A Birthday Wrapped in Starlight</title>
+  <!-- Google Fonts: Victorian & Handwriting Elegance -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Dancing+Script:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -15,17 +16,16 @@
 
     body {
       font-family: 'Quicksand', sans-serif;
-      background: #fdf5ed;
-      background-image: radial-gradient(circle at 20% 30%, rgba(230, 180, 130, 0.08) 2.5%, transparent 3%),
-                        radial-gradient(circle at 80% 70%, rgba(200, 150, 100, 0.06) 2%, transparent 2.5%),
-                        repeating-linear-gradient(45deg, rgba(255, 235, 210, 0.3) 0px, rgba(255, 235, 210, 0.3) 1px, transparent 1px, transparent 20px);
-      background-size: 55px 55px, 60px 60px, 30px 30px;
+      background: #fdf8f2;
+      background-image: radial-gradient(circle at 15% 40%, rgba(210, 180, 140, 0.1) 2%, transparent 2.5%),
+                        radial-gradient(circle at 85% 70%, rgba(80, 60, 40, 0.06) 1.5%, transparent 2%);
+      background-size: 48px 48px, 52px 52px;
       color: #3a2a1f;
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
 
-    /* animated sparkle canvas - more magical */
+    /* sparkle canvas */
     #sparkle-canvas {
       position: fixed;
       top: 0;
@@ -33,32 +33,23 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 998;
+      z-index: 997;
     }
 
-    /* floating petals & soft magic - enhanced */
+    /* floating petals & soft magic */
     .floating-petal {
       position: fixed;
       pointer-events: none;
-      font-size: 1.4rem;
-      opacity: 0.6;
-      animation: floatSoft 16s ease-in-out forwards;
+      font-size: 1.3rem;
+      opacity: 0.55;
+      animation: floatSoft 14s linear forwards;
       z-index: 999;
-      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
     }
 
     @keyframes floatSoft {
-      0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0.4; }
-      20% { opacity: 0.7; }
-      80% { opacity: 0.6; }
-      100% { transform: translateY(-20vh) rotate(400deg) scale(1.1); opacity: 0; }
-    }
-
-    /* surprise glow effect for page transitions */
-    @keyframes gentleGlow {
-      0% { box-shadow: 0 0 0 0 rgba(215, 120, 70, 0.4); }
-      70% { box-shadow: 0 0 0 15px rgba(215, 120, 70, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(215, 120, 70, 0); }
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.5; }
+      100% { transform: translateY(-20vh) rotate(380deg); opacity: 0; }
     }
 
     .page {
@@ -69,7 +60,6 @@
       padding: 3rem 1.5rem;
       position: relative;
       scroll-snap-align: start;
-      transition: background 0.5s ease;
     }
 
     .container {
@@ -78,246 +68,246 @@
       margin: 0 auto;
     }
 
-    /* elegant nav dots - gold shimmer */
+    /* refined nav dots - mobile friendly */
     .nav-dots {
       position: fixed;
-      right: 16px;
+      right: 12px;
       top: 50%;
       transform: translateY(-50%);
       z-index: 110;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .nav-dot {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: #d4a574;
+      background: #cfa67b;
       cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2);
-      border: 1px solid #fff4ea;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      position: relative;
-    }
-
-    .nav-dot::after {
-      content: '';
-      position: absolute;
-      top: -4px;
-      left: -4px;
-      right: -4px;
-      bottom: -4px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(215,120,70,0.3), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
+      transition: all 0.3s ease;
+      border: 1px solid #fff2e4;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
 
     .nav-dot.active {
-      background: #e07a3a;
-      transform: scale(2.2);
-      box-shadow: 0 0 12px #f5bc8c;
+      background: #d97a3a;
+      transform: scale(1.9);
+      box-shadow: 0 0 10px #f5bc8c;
     }
 
-    .nav-dot.active::after {
-      opacity: 1;
-      animation: gentleGlow 1.5s infinite;
-    }
-
-    /* page1 - hero with enchanting frame */
+    /* page1 - hero with childhood photo & wish */
     .page-1 {
-      background: radial-gradient(ellipse at 30% 40%, #fff3e8, #ffe0ce);
-      position: relative;
-    }
-    .page-1::before {
-      content: '✨';
-      position: absolute;
-      font-size: 120px;
-      opacity: 0.08;
-      bottom: 20px;
-      right: 20px;
-      pointer-events: none;
+      background: linear-gradient(125deg, #fff4ea, #ffe6d6);
     }
     .vintage-frame {
-      background: rgba(255, 252, 245, 0.96);
-      backdrop-filter: blur(8px);
-      border-radius: 80px 80px 70px 70px;
-      padding: 2rem;
-      box-shadow: 0 40px 55px -22px rgba(60, 30, 10, 0.3), inset 0 1px 4px rgba(255,255,240,0.9), 0 0 0 12px rgba(255, 240, 220, 0.4);
-      max-width: 560px;
+      background: rgba(255, 250, 242, 0.94);
+      backdrop-filter: blur(4px);
+      border-radius: 70px 70px 60px 60px;
+      padding: 1.8rem;
+      box-shadow: 0 30px 40px -18px rgba(60, 30, 10, 0.2);
+      max-width: 550px;
       margin: 0 auto;
       text-align: center;
-      border: 1px solid #ffefde;
-      transition: transform 0.4s ease;
-    }
-    .vintage-frame:hover {
-      transform: scale(1.01);
+      border: 1px solid #ffe2cc;
     }
     .portrait-img {
       width: 100%;
       max-width: 380px;
-      border-radius: 60px 60px 55px 55px;
+      border-radius: 55px 55px 50px 50px;
       object-fit: cover;
-      border: 6px solid #fffaf2;
-      box-shadow: 0 25px 35px -15px rgba(70, 35, 10, 0.25);
-      transition: transform 0.3s;
-    }
-    .portrait-img:hover {
-      transform: scale(1.02);
+      border: 5px solid #fff8ef;
+      box-shadow: 0 18px 28px -10px rgba(80, 45, 20, 0.15);
     }
     .handwrite-name {
       font-family: 'Dancing Script', cursive;
-      font-size: 4.2rem;
+      font-size: 4rem;
       font-weight: 700;
-      background: linear-gradient(135deg, #b85a2a, #da8750, #b85a2a);
-      background-size: 200% auto;
+      background: linear-gradient(135deg, #b55a2c, #d47b48);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin: 0.8rem 0 0.3rem;
-      letter-spacing: 2px;
-      animation: shimmer 3s infinite;
+      margin: 0.6rem 0 0.2rem;
     }
-    @keyframes shimmer {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .birthday-wish {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      background: #f7e9de;
+      display: inline-block;
+      padding: 0.4rem 1.5rem;
+      border-radius: 50px;
+      color: #a45d34;
+      font-style: italic;
     }
 
-    /* poetry section - elegant */
+    /* poetry section */
     .page-2 {
-      background: linear-gradient(125deg, #fff8f0, #ffefdf);
-      position: relative;
+      background: #fff9f2;
     }
     .poetry-card {
-      background: rgba(255, 253, 248, 0.96);
-      border-radius: 65px;
-      padding: 2.2rem 2rem;
-      max-width: 740px;
+      background: rgba(255, 252, 245, 0.94);
+      border-radius: 50px;
+      padding: 2rem 1.8rem;
+      max-width: 720px;
       margin: 0 auto;
-      box-shadow: 0 30px 45px -18px rgba(70, 40, 15, 0.15), inset 0 0 0 1px rgba(255,245,230,0.8);
-      border: none;
-      transition: all 0.3s;
+      box-shadow: 0 20px 30px -12px rgba(70, 40, 20, 0.08);
+      border: 1px solid #fae1ca;
     }
-    .poetry-card:hover {
-      box-shadow: 0 35px 50px -20px rgba(70, 40, 15, 0.2);
+    .verse {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.18rem;
+      line-height: 1.65;
+      color: #4f3322;
+      border-left: 4px solid #eab082;
+      padding-left: 1.3rem;
+      margin: 1.4rem 0;
+    }
+    .poem-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      color: #bc774a;
+      text-align: center;
+      margin-bottom: 1rem;
     }
 
-    /* memory lane - refined */
+    /* memory lane — bigger images, description ready */
     .page-3 {
-      background: #fffaf2;
+      background: #fffaf3;
+    }
+    .gallery-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.8rem;
+      text-align: center;
+      color: #bc774a;
+      margin-bottom: 1.8rem;
+    }
+    .memory-strip {
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+      max-width: 900px;
+      margin: 0 auto;
     }
     .memory-card {
-      background: rgba(255, 253, 248, 0.98);
-      border-radius: 55px;
-      padding: 1.2rem 1.2rem 1.8rem 1.2rem;
-      box-shadow: 0 18px 32px -18px rgba(80, 50, 25, 0.18);
-      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      border: 1px solid #ffefdf;
-    }
-    .memory-card:hover {
-      transform: translateY(-8px) scale(1.01);
-      box-shadow: 0 28px 40px -18px rgba(80, 50, 25, 0.25);
-      background: #ffffff;
-    }
-    .memory-card img {
+      display: flex;
+      flex-direction: column;
+      background: #fffdf9;
       border-radius: 48px;
-      transition: transform 0.4s;
+      padding: 1rem 1rem 1.5rem 1rem;
+      box-shadow: 0 12px 24px -14px rgba(90, 55, 30, 0.12);
+      transition: all 0.2s;
+      border: 1px solid #feeddb;
     }
-    .memory-card:hover img {
-      transform: scale(1.01);
+    .memory-card:hover { transform: translateY(-4px); background: #fffffc; }
+    .memory-card img {
+      width: 100%;
+      max-height: 380px;
+      object-fit: cover;
+      border-radius: 42px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+      margin-bottom: 1rem;
+    }
+    .memory-note {
+      padding: 0 0.5rem;
+    }
+    .memory-note p {
+      font-size: 1rem;
+      line-height: 1.55;
+      font-weight: 500;
+      color: #4e3726;
+      margin-bottom: 0.5rem;
+    }
+    .memory-note span {
+      font-size: 0.8rem;
+      color: #aa7a58;
+      font-family: 'Playfair Display', serif;
     }
 
-    /* letter page - vintage paper effect */
+    /* letter from heart */
     .page-4 {
-      background: #fdf3e9;
-      position: relative;
-    }
-    .page-4::after {
-      content: '✧';
-      font-size: 80px;
-      position: absolute;
-      bottom: 30px;
-      left: 20px;
-      opacity: 0.08;
-      font-family: serif;
+      background: #fff5ec;
     }
     .letter-vintage {
-      background: #fffef8;
-      border-radius: 75px;
-      padding: 2.5rem 2.2rem;
-      box-shadow: 0 32px 48px -24px rgba(60, 30, 10, 0.2), inset 0 1px 0 #fff8e0, inset 0 0 0 1px #fff0e0;
-      border: none;
-      position: relative;
+      background: #fffefa;
+      border-radius: 65px;
+      padding: 2rem 1.8rem;
+      max-width: 720px;
+      margin: 0 auto;
+      box-shadow: 0 28px 38px -18px rgba(80, 45, 20, 0.15);
+      border: 1px solid #fbe2ce;
     }
-    .letter-vintage::before {
-      content: '“';
-      font-size: 100px;
+    .handwritten-title {
       font-family: 'Dancing Script', cursive;
-      color: #e2aa7a;
-      opacity: 0.15;
-      position: absolute;
-      top: 20px;
-      left: 30px;
-      pointer-events: none;
+      font-size: 2.6rem;
+      color: #c57542;
+      text-align: center;
+      border-bottom: 2px dotted #f2cfb4;
+      display: inline-block;
+      width: auto;
+      margin: 0 auto 1rem;
+    }
+    .letter-body {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #3f2d1d;
+      margin: 1.8rem 0;
+    }
+    .signature {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.7rem;
+      text-align: right;
+      color: #be6a39;
+      margin-top: 1rem;
     }
 
-    /* closing stars - enchanted */
+    /* closing stars */
     .page-5 {
-      background: radial-gradient(ellipse at 50% 30%, #ffefdf, #ffe3cf);
-      position: relative;
+      background: linear-gradient(145deg, #feeddf, #ffe2cf);
+      text-align: center;
     }
     .star-blessing {
-      background: rgba(255, 252, 245, 0.55);
-      backdrop-filter: blur(3px);
-      border-radius: 85px;
-      padding: 2rem 1.8rem;
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 1.5rem;
     }
-    
-    /* audio player custom styling */
+    footer {
+      background: #dabd9e;
+      color: #3f281b;
+      text-align: center;
+      padding: 1.2rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1rem;
+    }
+
+    /* playlist embed */
     .playlist-embed {
-      background: rgba(255, 248, 240, 0.95);
-      border-radius: 70px;
-      padding: 1.3rem 1.5rem;
-      box-shadow: 0 18px 32px -12px rgba(0,0,0,0.12), inset 0 1px 2px rgba(255,255,220,0.8);
-      transition: all 0.3s;
+      margin: 2rem auto 0;
+      max-width: 480px;
+      border-radius: 45px;
+      overflow: hidden;
+      box-shadow: 0 10px 18px rgba(0,0,0,0.08);
     }
-    .playlist-embed:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 22px 38px -14px rgba(0,0,0,0.15);
-    }
-    audio {
-      width: 100%;
-      border-radius: 60px;
-      background: #f7ede3;
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.05));
-    }
-    audio::-webkit-media-controls-panel {
-      background: #f7ede3;
-    }
+    iframe { width: 100%; border-radius: 35px; border: none; }
 
-    /* surprise entrance animation for pages */
-    @keyframes fadeSlideUp {
-      0% { opacity: 0; transform: translateY(25px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    .page {
-      animation: fadeSlideUp 0.8s ease-out forwards;
-    }
-
-    /* responsive polish */
+    /* responsive mobile-first */
     @media (max-width: 680px) {
-      .vintage-frame { padding: 1.4rem; }
+      .page { padding: 2rem 1rem; }
       .handwrite-name { font-size: 3rem; }
-      .letter-vintage { padding: 1.6rem; }
-      .playlist-embed { padding: 1rem; }
+      .portrait-img { max-width: 280px; }
+      .memory-card img { max-height: 320px; }
+      .verse { font-size: 1rem; padding-left: 1rem; }
+      .letter-body { font-size: 1rem; }
+      .handwritten-title { font-size: 2.2rem; }
+      .poem-title { font-size: 1.8rem; }
     }
-    
+    @media (max-width: 480px) {
+      .memory-card img { max-height: 280px; }
+      .vintage-frame { padding: 1.2rem; }
+      .poetry-card { padding: 1.5rem; }
+    }
     html { scroll-snap-type: y mandatory; }
-    
-    /* surprise sparkle on load */
     .glow-dust {
       position: fixed;
       width: 5px;
@@ -331,22 +321,8 @@
     }
     @keyframes dustDrift {
       0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-      20% { opacity: 0.6; }
-      80% { opacity: 0.4; }
+      25% { opacity: 0.5; }
       100% { transform: translateY(-20vh) translateX(30px); opacity: 0; }
-    }
-    
-    /* custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #f0e0d0;
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #d99b62;
-      border-radius: 10px;
     }
   </style>
 </head>
@@ -400,7 +376,7 @@
   </div>
 </section>
 
-<!-- PAGE 3: MEMORY LANE — BIG IMAGES WITH YOUR DESCRIPTIONS -->
+<!-- PAGE 3: MEMORY LANE — BIG IMAGES WITH YOUR DESCRIPTIONS (you'll describe each one) -->
 <section class="page page-3" id="page3">
   <div class="container">
     <h2 class="gallery-title"><i class="fas fa-camera-retro"></i> Memory Lane · Treasures of You</h2>
@@ -439,7 +415,7 @@
       <p style="margin-top:1rem;">🌟 Wrapped in love, today and beyond 🌟</p>
       <div style="margin-top:1rem; font-family:'Dancing Script'; font-size:2rem; color:#c57341;">Happy Birthday, Mahetaz</div>
       <p style="margin-top:0.5rem;">You are the heartbeat of every celebration, the star that guides us all.</p>
-    <div class="playlist-embed" style="text-align:center;">
+    <div class="playlist-embed" style="text-align:center; background:#fffaf5; border-radius: 60px; padding: 1.5rem;">
   <audio controls style="width: 100%; border-radius: 50px; background: #f7ede3;">
     <source src="Ishq Bulaava Hasee Toh Phasee 128 Kbps.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
@@ -455,7 +431,7 @@
 <footer> ✦  May every star above whisper blessings upon thee, and may our hearts forever dance in this sweet, timeless melody ✦</footer>
 
 <script>
-  // enhanced sparkle canvas with golden shimmer
+  // sparkle canvas (gentle, mobile friendly)
   const sparkCanvas = document.getElementById('sparkle-canvas');
   const ctx2 = sparkCanvas.getContext('2d');
   let sparkArr = [];
@@ -469,11 +445,10 @@
     constructor() {
       this.x = Math.random() * sparkCanvas.width;
       this.y = Math.random() * sparkCanvas.height;
-      this.r = Math.random() * 2.5 + 1;
-      this.alpha = Math.random() * 0.5 + 0.2;
+      this.r = Math.random() * 2.2 + 1;
+      this.alpha = Math.random() * 0.4 + 0.15;
       this.vx = (Math.random() - 0.5) * 0.2;
       this.vy = (Math.random() - 0.6) * 0.12;
-      this.color = `hsl(${30 + Math.random() * 20}, 85%, 65%)`;
     }
     update() {
       this.x += this.vx;
@@ -482,20 +457,15 @@
       if (this.x > sparkCanvas.width) this.x = 0;
       if (this.y < 0) this.y = sparkCanvas.height;
       if (this.y > sparkCanvas.height) this.y = 0;
-      this.alpha = 0.3 + Math.sin(Date.now() * 0.003 + this.x) * 0.2;
     }
     draw() {
       ctx2.beginPath();
       ctx2.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-      ctx2.fillStyle = `rgba(255, 210, 140, ${this.alpha * 0.8})`;
-      ctx2.fill();
-      ctx2.beginPath();
-      ctx2.arc(this.x-0.5, this.y-0.5, this.r*0.4, 0, Math.PI*2);
-      ctx2.fillStyle = `rgba(255, 240, 180, 0.9)`;
+      ctx2.fillStyle = `rgba(245, 190, 130, ${this.alpha * 0.7})`;
       ctx2.fill();
     }
   }
-  for (let i=0;i<140;i++) sparkArr.push(new SoftSpark());
+  for (let i=0;i<110;i++) sparkArr.push(new SoftSpark());
   function animateSparkles() {
     ctx2.clearRect(0,0,sparkCanvas.width,sparkCanvas.height);
     for (let s of sparkArr) { s.update(); s.draw(); }
@@ -503,22 +473,24 @@
   }
   animateSparkles();
 
-  // enhanced floating petals - more variety
+  // floating petals (lighter load)
   function createPetal() {
     const el = document.createElement('div');
-    const icons = ['🌸','🌼','🍂','✨','🕊️','🌺','🎀','🌷','⭐','💫','🌙','🍃'];
+    const icons = ['🌸','🌼','🍂','✨','🕊️','🌺','🎀','🌷'];
     el.innerHTML = icons[Math.floor(Math.random()*icons.length)];
     el.classList.add('floating-petal');
     el.style.left = Math.random() * 100 + '%';
-    el.style.fontSize = (Math.random() * 20 + 14) + 'px';
-    el.style.animationDuration = (Math.random() * 12 + 8) + 's';
-    el.style.animationDelay = Math.random() * 3 + 's';
+    el.style.fontSize = (Math.random() * 16 + 14) + 'px';
+    el.style.animationDuration = (Math.random() * 10 + 8) + 's';
     document.body.appendChild(el);
-    setTimeout(() => el.remove(), 15000);
+    setTimeout(() => el.remove(), 13000);
   }
-  setInterval(() => { if (Math.random()>0.6) createPetal(); }, 1800);
+  setInterval(() => { if (Math.random()>0.65) createPetal(); }, 2000);
 
-  // memory data (unchanged)
+  // ================= MEMORY LANE =================
+  // You can replace each image src with your own photos, and edit the descriptions below.
+  // Each memory card has a large image (full width) and a dedicated description area.
+  // I've prepared 6 beautiful placeholders. You can add more if you like.
   const memoryData = [
     { 
       img: "image copy 4.png", 
@@ -563,7 +535,7 @@
   const childImg = document.getElementById('childhoodPhoto');
   childImg.onerror = () => { childImg.src = "https://placehold.co/500x500/FFE2CF/B86431?text=🌹+Little+Mahetaz"; };
 
-  // scroll navigation
+  // scroll navigation (5 sections)
   const sections = ['page1','page2','page3','page4','page5'];
   const dotNav = document.getElementById('navDots');
   sections.forEach(id => {
@@ -592,6 +564,7 @@
   window.addEventListener('resize', updateDots);
   updateDots();
   
+  // scroll arrow
   const scrollArrow = document.getElementById('scrollArrow');
   if(scrollArrow) {
     scrollArrow.addEventListener('click', () => {
@@ -599,25 +572,26 @@
     });
   }
 
-  // surprise effect: gentle sparkle rain on load
-  for(let i=0;i<20;i++) setTimeout(()=>createPetal(), i*150);
+  // initial floating petals and golden dust
+  for(let i=0;i<10;i++) setTimeout(()=>createPetal(), i*180);
   setInterval(() => {
-    if(Math.random() > 0.7) {
+    if(Math.random() > 0.75) {
       const dust = document.createElement('div');
       dust.classList.add('glow-dust');
       dust.style.left = Math.random() * 100 + '%';
-      dust.style.width = Math.random() * 8 + 3 + 'px';
+      dust.style.width = Math.random() * 7 + 3 + 'px';
       dust.style.height = dust.style.width;
-      dust.style.animationDuration = (Math.random() * 10 + 8) + 's';
+      dust.style.animationDuration = (Math.random() * 9 + 7) + 's';
       document.body.appendChild(dust);
-      setTimeout(() => dust.remove(), 14000);
+      setTimeout(() => dust.remove(), 13000);
     }
-  }, 1600);
+  }, 1800);
   
+  // small floating hearts on load
   window.addEventListener('load', () => {
     setTimeout(() => {
-      for(let i=0;i<12;i++) createPetal();
-    }, 400);
+      for(let i=0;i<6;i++) createPetal();
+    }, 500);
   });
 </script>
 </body>
