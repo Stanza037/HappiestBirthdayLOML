@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Mahetaz — A Birthday Wrapped in Starlight</title>
+  <!-- Google Fonts: Victorian & Handwriting Elegance -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Dancing+Script:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #fdf8f2;
+      background-image: radial-gradient(circle at 15% 40%, rgba(210, 180, 140, 0.1) 2%, transparent 2.5%),
+                        radial-gradient(circle at 85% 70%, rgba(80, 60, 40, 0.06) 1.5%, transparent 2%);
+      background-size: 48px 48px, 52px 52px;
+      color: #3a2a1f;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* sparkle canvas */
+    #sparkle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 997;
+    }
+
+    /* floating petals & soft magic */
+    .floating-petal {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.3rem;
+      opacity: 0.55;
+      animation: floatSoft 14s linear forwards;
+      z-index: 999;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+    }
+
+    @keyframes floatSoft {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.5; }
+      100% { transform: translateY(-20vh) rotate(380deg); opacity: 0; }
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+      position: relative;
+      scroll-snap-align: start;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* refined nav dots - mobile friendly */
+    .nav-dots {
+      position: fixed;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 110;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .nav-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #cfa67b;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid #fff2e4;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .nav-dot.active {
+      background: #d97a3a;
+      transform: scale(1.9);
+      box-shadow: 0 0 10px #f5bc8c;
+    }
+
+    /* page1 - hero with childhood photo & wish */
+    .page-1 {
+      background: linear-gradient(125deg, #fff4ea, #ffe6d6);
+    }
+    .vintage-frame {
+      background: rgba(255, 250, 242, 0.94);
+      backdrop-filter: blur(4px);
+      border-radius: 70px 70px 60px 60px;
+      padding: 1.8rem;
+      box-shadow: 0 30px 40px -18px rgba(60, 30, 10, 0.2);
+      max-width: 550px;
+      margin: 0 auto;
+      text-align: center;
+      border: 1px solid #ffe2cc;
+    }
+    .portrait-img {
+      width: 100%;
+      max-width: 380px;
+      border-radius: 55px 55px 50px 50px;
+      object-fit: cover;
+      border: 5px solid #fff8ef;
+      box-shadow: 0 18px 28px -10px rgba(80, 45, 20, 0.15);
+    }
+    .handwrite-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #b55a2c, #d47b48);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 0.6rem 0 0.2rem;
+    }
+    .birthday-wish {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      background: #f7e9de;
+      display: inline-block;
+      padding: 0.4rem 1.5rem;
+      border-radius: 50px;
+      color: #a45d34;
+      font-style: italic;
+    }
+
+    /* poetry section */
+    .page-2 {
+      background: #fff9f2;
+    }
+    .poetry-card {
+      background: rgba(255, 252, 245, 0.94);
+      border-radius: 50px;
+      padding: 2rem 1.8rem;
+      max-width: 720px;
+      margin: 0 auto;
+      box-shadow: 0 20px 30px -12px rgba(70, 40, 20, 0.08);
+      border: 1px solid #fae1ca;
+    }
+    .verse {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.18rem;
+      line-height: 1.65;
+      color: #4f3322;
+      border-left: 4px solid #eab082;
+      padding-left: 1.3rem;
+      margin: 1.4rem 0;
+    }
+    .poem-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      color: #bc774a;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    /* memory lane — bigger images, description ready */
+    .page-3 {
+      background: #fffaf3;
+    }
+    .gallery-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.8rem;
+      text-align: center;
+      color: #bc774a;
+      margin-bottom: 1.8rem;
+    }
+    .memory-strip {
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .memory-card {
+      display: flex;
+      flex-direction: column;
+      background: #fffdf9;
+      border-radius: 48px;
+      padding: 1rem 1rem 1.5rem 1rem;
+      box-shadow: 0 12px 24px -14px rgba(90, 55, 30, 0.12);
+      transition: all 0.2s;
+      border: 1px solid #feeddb;
+    }
+    .memory-card:hover { transform: translateY(-4px); background: #fffffc; }
+    .memory-card img {
+      width: 100%;
+      max-height: 380px;
+      object-fit: cover;
+      border-radius: 42px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+      margin-bottom: 1rem;
+    }
+    .memory-note {
+      padding: 0 0.5rem;
+    }
+    .memory-note p {
+      font-size: 1rem;
+      line-height: 1.55;
+      font-weight: 500;
+      color: #4e3726;
+      margin-bottom: 0.5rem;
+    }
+    .memory-note span {
+      font-size: 0.8rem;
+      color: #aa7a58;
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* letter from heart */
+    .page-4 {
+      background: #fff5ec;
+    }
+    .letter-vintage {
+      background: #fffefa;
+      border-radius: 65px;
+      padding: 2rem 1.8rem;
+      max-width: 720px;
+      margin: 0 auto;
+      box-shadow: 0 28px 38px -18px rgba(80, 45, 20, 0.15);
+      border: 1px solid #fbe2ce;
+    }
+    .handwritten-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.6rem;
+      color: #c57542;
+      text-align: center;
+      border-bottom: 2px dotted #f2cfb4;
+      display: inline-block;
+      width: auto;
+      margin: 0 auto 1rem;
+    }
+    .letter-body {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #3f2d1d;
+      margin: 1.8rem 0;
+    }
+    .signature {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.7rem;
+      text-align: right;
+      color: #be6a39;
+      margin-top: 1rem;
+    }
+
+    /* closing stars */
+    .page-5 {
+      background: linear-gradient(145deg, #feeddf, #ffe2cf);
+      text-align: center;
+    }
+    .star-blessing {
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+    footer {
+      background: #dabd9e;
+      color: #3f281b;
+      text-align: center;
+      padding: 1.2rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1rem;
+    }
+
+    /* playlist embed */
+    .playlist-embed {
+      margin: 2rem auto 0;
+      max-width: 480px;
+      border-radius: 45px;
+      overflow: hidden;
+      box-shadow: 0 10px 18px rgba(0,0,0,0.08);
+    }
+    iframe { width: 100%; border-radius: 35px; border: none; }
+
+    /* ===== BEAUTIFUL DOORWAY TO BANQUET PAGE ===== */
+    .banquet-doorway {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      cursor: pointer;
+      animation: gentleFloat 2.5s infinite ease-in-out;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.15));
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateX(-50%) translateY(0px); }
+      50% { transform: translateX(-50%) translateY(-8px); }
+    }
+
+    .doorway-button {
+      background: linear-gradient(135deg, #d9864a, #c46a36);
+      backdrop-filter: blur(8px);
+      padding: 1rem 2.2rem;
+      border-radius: 80px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #fff8ef;
+      border: 2px solid #ffe4c4;
+      box-shadow: 0 6px 20px rgba(160, 80, 30, 0.4);
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+      backdrop-filter: blur(4px);
+    }
+
+    .doorway-button i {
+      font-size: 1.6rem;
+      transition: transform 0.3s ease;
+    }
+
+    .doorway-button:hover {
+      background: linear-gradient(135deg, #e09a62, #cf7a48);
+      transform: scale(1.02);
+      border-color: #fff0db;
+      box-shadow: 0 10px 28px rgba(180, 85, 30, 0.5);
+    }
+
+    .doorway-button:hover i {
+      transform: translateX(6px) rotate(8deg);
+    }
+
+    /* overlay modal for enchanting transition */
+    .portal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #fff3e6, #f7dbbc);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      pointer-events: none;
+    }
+
+    .portal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+
+    .portal-content {
+      text-align: center;
+      transform: scale(0.9);
+      transition: transform 0.5s ease;
+    }
+
+    .portal-overlay.active .portal-content {
+      transform: scale(1);
+    }
+
+    .portal-content i {
+      font-size: 5rem;
+      color: #e2a36b;
+      animation: portalSpin 1.2s infinite ease;
+      display: inline-block;
+    }
+
+    @keyframes portalSpin {
+      0% { transform: rotate(0deg) scale(1); opacity: 0.6; }
+      50% { transform: rotate(180deg) scale(1.2); opacity: 1; }
+      100% { transform: rotate(360deg) scale(1); opacity: 0.6; }
+    }
+
+    .portal-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      color: #b75f33;
+      margin-top: 1.2rem;
+      letter-spacing: 2px;
+      background: rgba(255, 245, 235, 0.7);
+      padding: 0.5rem 1.5rem;
+      border-radius: 60px;
+      backdrop-filter: blur(4px);
+    }
+
+    .portal-sub {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      color: #aa764c;
+      margin-top: 0.5rem;
+    }
+
+    /* responsive mobile */
+    @media (max-width: 680px) {
+      .page { padding: 2rem 1rem; }
+      .handwrite-name { font-size: 3rem; }
+      .portrait-img { max-width: 280px; }
+      .memory-card img { max-height: 320px; }
+      .verse { font-size: 1rem; padding-left: 1rem; }
+      .letter-body { font-size: 1rem; }
+      .handwritten-title { font-size: 2.2rem; }
+      .poem-title { font-size: 1.8rem; }
+      .doorway-button { padding: 0.7rem 1.6rem; font-size: 1.1rem; }
+      .portal-text { font-size: 1.4rem; }
+    }
+    @media (max-width: 480px) {
+      .memory-card img { max-height: 280px; }
+      .vintage-frame { padding: 1.2rem; }
+      .poetry-card { padding: 1.5rem; }
+      .doorway-button { padding: 0.6rem 1.3rem; font-size: 1rem; gap: 0.6rem; }
+    }
+    html { scroll-snap-type: y mandatory; }
+    .glow-dust {
+      position: fixed;
+      width: 5px;
+      height: 5px;
+      background: #f7bc7a;
+      border-radius: 50%;
+      filter: blur(1px);
+      pointer-events: none;
+      z-index: 996;
+      animation: dustDrift 15s linear infinite;
+    }
+    @keyframes dustDrift {
+      0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+      25% { opacity: 0.5; }
+      100% { transform: translateY(-20vh) translateX(30px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="sparkle-canvas"></canvas>
+<div class="nav-dots" id="navDots"></div>
+
+<!-- PAGE 1: CHILDHOOD PHOTO + WISH (Hero) -->
+<section class="page page-1" id="page1">
+  <div class="container" style="text-align:center">
+    <div class="vintage-frame">
+      <img class="portrait-img" id="childhoodPhoto" alt="Mahetaz childhood" src="image.png">
+      <h1 class="handwrite-name">Mahetaz</h1>
+      <div class="birthday-wish"><i class="fas fa-star"></i> Happiest Birthday, Beautiful Soul <i class="fas fa-star"></i></div>
+      <p style="margin-top:1rem; font-size:0.95rem; color:#7e5a40;"><i class="fas fa-feather-alt"></i> From the little girl who held stardust in her eyes to the magnificent woman you've become, every version of you is pure magic. Today, the universe celebrates YOU✨.</p>
+      <p style="margin-top:0.7rem; font-size:0.9rem; font-style:italic;">“May your life always be as beautiful as the dreams you’ve carried since childhood.”</p>
+    </div>
+    <div style="margin-top:1.8rem; font-size:1.3rem; animation: gentleBounce 2s infinite; cursor:pointer;" id="scrollArrow"><i class="fas fa-chevron-down" style="color:#c47a44;"></i></div>
+  </div>
+</section>
+
+<!-- PAGE 2: POETRY & BLESSINGS SECTION -->
+<section class="page page-2" id="page2">
+  <div class="container">
+    <div class="poetry-card">
+      <div class="poem-title">🌸 Petals of Verse for Mahetaz 🌸</div>
+      <div class="verse">
+        “She walks in beauty, like the night<br>
+        Of cloudless climes and starry skies;<br>
+        And all that’s best of dark and bright<br>
+        Meet in her aspect and her eyes.”<br>
+        <span style="font-size:0.85rem;">— Lord Byron, for you</span>
+      </div>
+      <div class="verse">
+        Your laughter is a melody that never fades,<br>
+        Your kindness is a garden in full bloom.<br>
+        May every step you take be blessed with light,<br>
+        May every dream you hold find its way to the moon.
+      </div>
+      <div class="verse">
+        On this day, the world is dressed in gold,<br>
+        Because a soul like yours was born.<br>
+        May happiness follow you like a loyal shadow,<br>
+        And may you always be loved, cherished, and adored.
+      </div>
+      <div style="text-align:center; margin-top:1.2rem; font-family:'Dancing Script'; font-size:1.3rem; color:#bc6f3f;">
+        ✨ Happy Birthday, Mahetaz — you are a once-in-a-lifetime wonder ✨
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 3: MEMORY LANE — BIG IMAGES WITH YOUR DESCRIPTIONS (you'll describe each one) -->
+<section class="page page-3" id="page3">
+  <div class="container">
+    <h2 class="gallery-title"><i class="fas fa-camera-retro"></i> Memory Lane · Treasures of You</h2>
+    <div class="memory-strip" id="memoryGallery"></div>
+    <p style="text-align:center; margin-top:1.8rem; font-family:'Playfair Display'; font-style:italic; color:#a76e48;">I find myself at a loss for words before such elegance😗</p>
+  </div>
+</section>
+
+<!-- PAGE 4: A Letter from the Heart (Victorian elegance) -->
+<section class="page page-4" id="page4">
+  <div class="container">
+    <div class="letter-vintage">
+      <div style="text-align:center"><span class="handwritten-title">Dearest Mahetaz</span></div>
+      <div class="letter-body">
+       <div class="letter-body">
+   <p>There are souls who walk into a room and change the very air — filling it with warmth, with light, with the quiet promise of something beautiful. That is you, always.</p>
+        <p>On your birthday, I wanted to wrap these words in ribbons and lace, just like the finest memory. Every laugh we've shared, every silent understanding, every adventure — you've painted my world in golden hues. You are the kind of person that poems are written about, the one who makes ordinary days feel like a celebration.</p>
+        <p>May life always be gentle with you, may your dreams bloom like wildflowers in spring, and may you always know how infinitely you are cherished. You are magic, Mahetaz — never doubt the beauty you carry within.</p>
+        <p>With every whisper of the wind, I send you love and wishes that stretch beyond forever.</p>
+      </div>
+      <div class="signature">— Forever your Friend, with all my heart 🧡</div>
+      <div style="text-align: center; margin-top: 0.8rem; font-size: 1.4rem;">🌹✨🎀</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 5: Closing Stars & Final Blessing (with playlist) -->
+<section class="page page-5" id="page5">
+  <div class="container star-blessing">
+    <i class="fas fa-moon-stars" style="font-size: 3.5rem; color: #e2a16a;"></i>
+    <h2 style="font-family:'Dancing Script'; font-size: 2.6rem; margin: 0.8rem 0;">Under the Same Starlight</h2>
+    <div class="verse" style="border-left-color:#f1ba8b; text-align:center; border-left:none;">
+      <p>May every dawn greet you with a new reason to smile.</p>
+      <p>May the universe always conspire in your favor.</p>
+      <p>You are the poetry that does not fade, the light that never dims.</p>
+      <p style="margin-top:1rem;">🌟 Wrapped in love, today and beyond 🌟</p>
+      <div style="margin-top:1rem; font-family:'Dancing Script'; font-size:2rem; color:#c57341;">Happy Birthday, Mahetaz</div>
+      <p style="margin-top:0.5rem;">You are the heartbeat of every celebration, the star that guides us all.</p>
+    <div class="playlist-embed" style="text-align:center; background:#fffaf5; border-radius: 60px; padding: 1.5rem;">
+  <audio controls style="width: 100%; border-radius: 50px; background: #f7ede3;">
+    <source src="Ishq Bulaava Hasee Toh Phasee 128 Kbps.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <p style="text-align:center; font-size:0.8rem; margin-top:0.8rem; color:#a76e48;">
+    🎧 For you, Mahetaz — play from at 1:19 🎧
+    Yeah those are my words for you
+  </p>
+</div>
+  </div>
+</section>
+
+<footer> ✦  May every star above whisper blessings upon thee, and may our hearts forever dance in this sweet, timeless melody ✦</footer>
+
+<!-- ===== BEAUTIFUL DOORWAY TO BANQUET PAGE ===== -->
+<div class="banquet-doorway" id="banquetDoorway">
+  <div class="doorway-button">
+    <i class="fas fa-archway"></i>
+    <span>Enter the Banquet Hall</span>
+    <i class="fas fa-champagne-glasses"></i>
+  </div>
+</div>
+
+<!-- portal transition overlay -->
+<div class="portal-overlay" id="portalOverlay">
+  <div class="portal-content">
+    <i class="fas fa-magic"></i>
+    <div class="portal-text">Opening the doors to celebration...</div>
+    <div class="portal-sub">a banquet of joy awaits, Mahetaz ✨</div>
+  </div>
+</div>
+
+<script>
+  // sparkle canvas (gentle, mobile friendly)
+  const sparkCanvas = document.getElementById('sparkle-canvas');
+  const ctx2 = sparkCanvas.getContext('2d');
+  let sparkArr = [];
+  function resizeSpark() {
+    sparkCanvas.width = window.innerWidth;
+    sparkCanvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeSpark);
+  resizeSpark();
+  class SoftSpark {
+    constructor() {
+      this.x = Math.random() * sparkCanvas.width;
+      this.y = Math.random() * sparkCanvas.height;
+      this.r = Math.random() * 2.2 + 1;
+      this.alpha = Math.random() * 0.4 + 0.15;
+      this.vx = (Math.random() - 0.5) * 0.2;
+      this.vy = (Math.random() - 0.6) * 0.12;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0) this.x = sparkCanvas.width;
+      if (this.x > sparkCanvas.width) this.x = 0;
+      if (this.y < 0) this.y = sparkCanvas.height;
+      if (this.y > sparkCanvas.height) this.y = 0;
+    }
+    draw() {
+      ctx2.beginPath();
+      ctx2.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx2.fillStyle = `rgba(245, 190, 130, ${this.alpha * 0.7})`;
+      ctx2.fill();
+    }
+  }
+  for (let i=0;i<110;i++) sparkArr.push(new SoftSpark());
+  function animateSparkles() {
+    ctx2.clearRect(0,0,sparkCanvas.width,sparkCanvas.height);
+    for (let s of sparkArr) { s.update(); s.draw(); }
+    requestAnimationFrame(animateSparkles);
+  }
+  animateSparkles();
+
+  // floating petals (lighter load)
+  function createPetal() {
+    const el = document.createElement('div');
+    const icons = ['🌸','🌼','🍂','✨','🕊️','🌺','🎀','🌷'];
+    el.innerHTML = icons[Math.floor(Math.random()*icons.length)];
+    el.classList.add('floating-petal');
+    el.style.left = Math.random() * 100 + '%';
+    el.style.fontSize = (Math.random() * 16 + 14) + 'px';
+    el.style.animationDuration = (Math.random() * 10 + 8) + 's';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 13000);
+  }
+  setInterval(() => { if (Math.random()>0.65) createPetal(); }, 2000);
+
+  // ================= MEMORY LANE =================
+  const memoryData = [
+    { 
+      img: "image copy 4.png", 
+      desc: "🌸 The little dreamer.. even then, your eyes held galaxies. The world was already yours, wrapped in curiosity and grace. This is where your story began to sparkle." 
+    },
+    { 
+      img: "image copy.png", 
+      desc: "🍂 Golden sunlight and your radiant smile., a moment frozen in perfect joy. I remember this picture(Even drawn it worse lol) like a verse from an old poem: timeless, warm, and filled with laughter." 
+    },
+    { 
+      img: "image copy 2.png", 
+      desc: "🌿CULTURAL??? looks Brave, curious, full of wonder. This picture captures your fearless heart.. always ready to explore, to love, to grow. A true reflection of your beautiful soul." 
+    },
+    { 
+      img: "image copy 3.png", 
+      desc: "💖 A heart made of kindness one must adore(only me) you've always carried the warmth of a thousand suns. This photo reminds me how you make everyone around you feel seen and cherished." 
+    },
+  ];
+
+  const galleryDiv = document.getElementById('memoryGallery');
+  function buildMemories() {
+    galleryDiv.innerHTML = '';
+    memoryData.forEach((item, idx) => {
+      const card = document.createElement('div');
+      card.className = 'memory-card';
+      const img = document.createElement('img');
+      img.src = item.img;
+      img.alt = `Mahetaz memory ${idx+1}`;
+      img.loading = "lazy";
+      img.onerror = () => { img.src = "https://placehold.co/700x500/FFE0CE/AC6240?text=❤️+Mahetaz"; };
+      const noteDiv = document.createElement('div');
+      noteDiv.className = 'memory-note';
+      noteDiv.innerHTML = `<p><i class="fas fa-feather-alt"></i> ${item.desc}</p><span><i class="far fa-heart"></i> memory no. ${idx+1}</span>`;
+      card.appendChild(img);
+      card.appendChild(noteDiv);
+      galleryDiv.appendChild(card);
+    });
+  }
+  buildMemories();
+
+  // childhood photo fallback
+  const childImg = document.getElementById('childhoodPhoto');
+  childImg.onerror = () => { childImg.src = "https://placehold.co/500x500/FFE2CF/B86431?text=🌹+Little+Mahetaz"; };
+
+  // scroll navigation (5 sections)
+  const sections = ['page1','page2','page3','page4','page5'];
+  const dotNav = document.getElementById('navDots');
+  sections.forEach(id => {
+    const dot = document.createElement('div');
+    dot.classList.add('nav-dot');
+    dot.addEventListener('click', () => document.getElementById(id).scrollIntoView({ behavior: 'smooth' }));
+    dotNav.appendChild(dot);
+  });
+  function updateDots() {
+    const scrollPos = window.scrollY + window.innerHeight/2.5;
+    let activeIdx = 0;
+    sections.forEach((id, idx) => {
+      const el = document.getElementById(id);
+      if(el) {
+        const top = el.offsetTop;
+        const bottom = top + el.offsetHeight;
+        if(scrollPos >= top && scrollPos <= bottom) activeIdx = idx;
+      }
+    });
+    document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+      if(i === activeIdx) dot.classList.add('active');
+      else dot.classList.remove('active');
+    });
+  }
+  window.addEventListener('scroll', updateDots);
+  window.addEventListener('resize', updateDots);
+  updateDots();
+  
+  // scroll arrow
+  const scrollArrow = document.getElementById('scrollArrow');
+  if(scrollArrow) {
+    scrollArrow.addEventListener('click', () => {
+      document.getElementById('page2').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  // initial floating petals and golden dust
+  for(let i=0;i<10;i++) setTimeout(()=>createPetal(), i*180);
+  setInterval(() => {
+    if(Math.random() > 0.75) {
+      const dust = document.createElement('div');
+      dust.classList.add('glow-dust');
+      dust.style.left = Math.random() * 100 + '%';
+      dust.style.width = Math.random() * 7 + 3 + 'px';
+      dust.style.height = dust.style.width;
+      dust.style.animationDuration = (Math.random() * 9 + 7) + 's';
+      document.body.appendChild(dust);
+      setTimeout(() => dust.remove(), 13000);
+    }
+  }, 1800);
+  
+  // ===== BEAUTIFUL DOORWAY TO BANQUET PAGE =====
+  const doorwayBtn = document.getElementById('banquetDoorway');
+  const portalOverlay = document.getElementById('portalOverlay');
+  let transitionTimeout = null;
+  
+  function navigateToBanquet() {
+    // show the magical portal overlay
+    portalOverlay.classList.add('active');
+    
+    // add extra sparkle confetti during transition
+    if (typeof canvasConfetti !== 'undefined') {
+      canvasConfetti({ particleCount: 80, spread: 70, origin: { y: 0.5 }, colors: ['#f3bc8c', '#e6a16a', '#ffcf9a'] });
+      setTimeout(() => {
+        canvasConfetti({ particleCount: 50, spread: 100, origin: { y: 0.4 }, startVelocity: 15 });
+      }, 200);
+    } else {
+      // manual mini spark effect if confetti lib missing
+      for(let i=0;i<20;i++) {
+        setTimeout(() => createPetal(), i*30);
+      }
+    }
+    
+    // wait for animation to finish then redirect to banquet.html
+    transitionTimeout = setTimeout(() => {
+      window.location.href = "banquet.html";
+    }, 1600);
+  }
+  
+  if (doorwayBtn) {
+    doorwayBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigateToBanquet();
+    });
+  }
+  
+  // also allow clicking on any child inside the doorway button
+  const doorwayChildren = document.querySelectorAll('.doorway-button, .banquet-doorway *');
+  doorwayChildren.forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!portalOverlay.classList.contains('active')) {
+        navigateToBanquet();
+      }
+    });
+  });
+  
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      for(let i=0;i<6;i++) createPetal();
+    }, 500);
+  });
+</script>
+
+<!-- optional confetti library for extra sparkle -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+</body>
+</html>
