@@ -476,7 +476,7 @@
         Of cloudless climes and starry skies;<br>
         And all that’s best of dark and bright<br>
         Meet in her aspect and her eyes.”<br>
-        <span style="font-size:0.85rem;">— Mohammed Ali, for you</span>
+        <span style="font-size:0.85rem;">— Lord Byron, for you</span>
       </div>
       <div class="verse">
         Your laughter is a melody that never fades,<br>
@@ -723,10 +723,27 @@
     }
   }, 1800);
   
-  // ===== BEAUTIFUL DOORWAY TO BANQUET PAGE =====
+  // ===== FIXED: BEAUTIFUL DOORWAY TO BANQUET PAGE (Works on GitHub Pages) =====
   const doorwayBtn = document.getElementById('banquetDoorway');
   const portalOverlay = document.getElementById('portalOverlay');
   let transitionTimeout = null;
+  
+  function getBanquetUrl() {
+    // Get the current path without the filename
+    const currentPath = window.location.pathname;
+    const pathParts = currentPath.split('/');
+    // Remove the last part (current filename) to get the directory
+    pathParts.pop();
+    const basePath = pathParts.join('/');
+    
+    // If we're in a subdirectory, build the correct path
+    if (basePath) {
+      return basePath + '/banquet.html';
+    } else {
+      // We're at the root level
+      return 'banquet.html';
+    }
+  }
   
   function navigateToBanquet() {
     // show the magical portal overlay
@@ -745,16 +762,22 @@
       }
     }
     
+    // Get the correct banquet URL
+    const banquetUrl = getBanquetUrl();
+    
     // wait for animation to finish then redirect to banquet.html
     transitionTimeout = setTimeout(() => {
-      window.location.href = "banquet.html";
+      window.location.href = banquetUrl;
     }, 1600);
   }
   
   if (doorwayBtn) {
     doorwayBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      navigateToBanquet();
+      e.stopPropagation();
+      if (!portalOverlay.classList.contains('active')) {
+        navigateToBanquet();
+      }
     });
   }
   
@@ -777,6 +800,4 @@
 </script>
 
 <!-- optional confetti library for extra sparkle -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net
