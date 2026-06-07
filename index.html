@@ -291,7 +291,125 @@
     }
     iframe { width: 100%; border-radius: 35px; border: none; }
 
-    /* responsive mobile-first */
+    /* ===== BEAUTIFUL DOORWAY TO BANQUET PAGE ===== */
+    .banquet-doorway {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      cursor: pointer;
+      animation: gentleFloat 2.5s infinite ease-in-out;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.15));
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateX(-50%) translateY(0px); }
+      50% { transform: translateX(-50%) translateY(-8px); }
+    }
+
+    .doorway-button {
+      background: linear-gradient(135deg, #d9864a, #c46a36);
+      backdrop-filter: blur(8px);
+      padding: 1rem 2.2rem;
+      border-radius: 80px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #fff8ef;
+      border: 2px solid #ffe4c4;
+      box-shadow: 0 6px 20px rgba(160, 80, 30, 0.4);
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+      backdrop-filter: blur(4px);
+    }
+
+    .doorway-button i {
+      font-size: 1.6rem;
+      transition: transform 0.3s ease;
+    }
+
+    .doorway-button:hover {
+      background: linear-gradient(135deg, #e09a62, #cf7a48);
+      transform: scale(1.02);
+      border-color: #fff0db;
+      box-shadow: 0 10px 28px rgba(180, 85, 30, 0.5);
+    }
+
+    .doorway-button:hover i {
+      transform: translateX(6px) rotate(8deg);
+    }
+
+    /* overlay modal for enchanting transition */
+    .portal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #fff3e6, #f7dbbc);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      pointer-events: none;
+    }
+
+    .portal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+
+    .portal-content {
+      text-align: center;
+      transform: scale(0.9);
+      transition: transform 0.5s ease;
+    }
+
+    .portal-overlay.active .portal-content {
+      transform: scale(1);
+    }
+
+    .portal-content i {
+      font-size: 5rem;
+      color: #e2a36b;
+      animation: portalSpin 1.2s infinite ease;
+      display: inline-block;
+    }
+
+    @keyframes portalSpin {
+      0% { transform: rotate(0deg) scale(1); opacity: 0.6; }
+      50% { transform: rotate(180deg) scale(1.2); opacity: 1; }
+      100% { transform: rotate(360deg) scale(1); opacity: 0.6; }
+    }
+
+    .portal-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      color: #b75f33;
+      margin-top: 1.2rem;
+      letter-spacing: 2px;
+      background: rgba(255, 245, 235, 0.7);
+      padding: 0.5rem 1.5rem;
+      border-radius: 60px;
+      backdrop-filter: blur(4px);
+    }
+
+    .portal-sub {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      color: #aa764c;
+      margin-top: 0.5rem;
+    }
+
+    /* responsive mobile */
     @media (max-width: 680px) {
       .page { padding: 2rem 1rem; }
       .handwrite-name { font-size: 3rem; }
@@ -301,11 +419,14 @@
       .letter-body { font-size: 1rem; }
       .handwritten-title { font-size: 2.2rem; }
       .poem-title { font-size: 1.8rem; }
+      .doorway-button { padding: 0.7rem 1.6rem; font-size: 1.1rem; }
+      .portal-text { font-size: 1.4rem; }
     }
     @media (max-width: 480px) {
       .memory-card img { max-height: 280px; }
       .vintage-frame { padding: 1.2rem; }
       .poetry-card { padding: 1.5rem; }
+      .doorway-button { padding: 0.6rem 1.3rem; font-size: 1rem; gap: 0.6rem; }
     }
     html { scroll-snap-type: y mandatory; }
     .glow-dust {
@@ -355,7 +476,7 @@
         Of cloudless climes and starry skies;<br>
         And all that’s best of dark and bright<br>
         Meet in her aspect and her eyes.”<br>
-        <span style="font-size:0.85rem;">— Mohammed Ali, for you</span>
+        <span style="font-size:0.85rem;">— Lord Byron, for you</span>
       </div>
       <div class="verse">
         Your laughter is a melody that never fades,<br>
@@ -430,6 +551,24 @@
 
 <footer> ✦  May every star above whisper blessings upon thee, and may our hearts forever dance in this sweet, timeless melody ✦</footer>
 
+<!-- ===== BEAUTIFUL DOORWAY TO BANQUET PAGE ===== -->
+<div class="banquet-doorway" id="banquetDoorway">
+  <div class="doorway-button">
+    <i class="fas fa-archway"></i>
+    <span>Enter the Banquet Hall</span>
+    <i class="fas fa-champagne-glasses"></i>
+  </div>
+</div>
+
+<!-- portal transition overlay -->
+<div class="portal-overlay" id="portalOverlay">
+  <div class="portal-content">
+    <i class="fas fa-magic"></i>
+    <div class="portal-text">Opening the doors to celebration...</div>
+    <div class="portal-sub">a banquet of joy awaits, Mahetaz ✨</div>
+  </div>
+</div>
+
 <script>
   // sparkle canvas (gentle, mobile friendly)
   const sparkCanvas = document.getElementById('sparkle-canvas');
@@ -488,9 +627,6 @@
   setInterval(() => { if (Math.random()>0.65) createPetal(); }, 2000);
 
   // ================= MEMORY LANE =================
-  // You can replace each image src with your own photos, and edit the descriptions below.
-  // Each memory card has a large image (full width) and a dedicated description area.
-  // I've prepared 6 beautiful placeholders. You can add more if you like.
   const memoryData = [
     { 
       img: "image copy 4.png", 
@@ -587,12 +723,60 @@
     }
   }, 1800);
   
-  // small floating hearts on load
+  // ===== BEAUTIFUL DOORWAY TO BANQUET PAGE =====
+  const doorwayBtn = document.getElementById('banquetDoorway');
+  const portalOverlay = document.getElementById('portalOverlay');
+  let transitionTimeout = null;
+  
+  function navigateToBanquet() {
+    // show the magical portal overlay
+    portalOverlay.classList.add('active');
+    
+    // add extra sparkle confetti during transition
+    if (typeof canvasConfetti !== 'undefined') {
+      canvasConfetti({ particleCount: 80, spread: 70, origin: { y: 0.5 }, colors: ['#f3bc8c', '#e6a16a', '#ffcf9a'] });
+      setTimeout(() => {
+        canvasConfetti({ particleCount: 50, spread: 100, origin: { y: 0.4 }, startVelocity: 15 });
+      }, 200);
+    } else {
+      // manual mini spark effect if confetti lib missing
+      for(let i=0;i<20;i++) {
+        setTimeout(() => createPetal(), i*30);
+      }
+    }
+    
+    // wait for animation to finish then redirect to banquet.html
+    transitionTimeout = setTimeout(() => {
+      window.location.href = "banquet.html";
+    }, 1600);
+  }
+  
+  if (doorwayBtn) {
+    doorwayBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigateToBanquet();
+    });
+  }
+  
+  // also allow clicking on any child inside the doorway button
+  const doorwayChildren = document.querySelectorAll('.doorway-button, .banquet-doorway *');
+  doorwayChildren.forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!portalOverlay.classList.contains('active')) {
+        navigateToBanquet();
+      }
+    });
+  });
+  
   window.addEventListener('load', () => {
     setTimeout(() => {
       for(let i=0;i<6;i++) createPetal();
     }, 500);
   });
 </script>
+
+<!-- optional confetti library for extra sparkle -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
 </body>
 </html>
